@@ -1,7 +1,7 @@
 // test
 #[cfg(test)]
 mod tests {
-    use crate::analyzer::calculate_growth_rate;
+    use crate::value::calculate_growth_rate;
 
     #[test]
     fn growth_rate_test() {
@@ -12,11 +12,23 @@ mod tests {
 }
 
 
-mod analyzer {
+mod value {
 
-    pub fn calculate_intrinsic_value() {
+    pub fn calculate_intrinsic_value(future_cash_flow_list: Vec<f32>, r: f32, growth_rate: f32) -> f32 {
+
+        let mut discounted_cashflow = 0.0;
+        let mut n = 0;
         
+        for cashflow in &future_cash_flow_list {
+            n += 1;
+            discounted_cashflow += cashflow / (1.0 + &r).powf(n as f32);
+        }
+        // [Final Year FCF * (1 + Perpetuity Growth Rate)] ÷ (Discount Rate – Perpetuity Growth Rate)
+        discounted_cashflow += (future_cash_flow_list[future_cash_flow_list.len() - 1] * (1.0 + growth_rate)) / (&r - growth_rate);
+    
+        return discounted_cashflow
     }
+
 
     pub fn calculate_growth_rate(cash_flow_list: Vec<i32>) -> f32 {
 
@@ -40,6 +52,20 @@ mod analyzer {
 
         let avg_growth_rate: f32 = (all_growth_rates.iter().sum::<i32>() as f32) / all_growth_rates.len() as f32;
         return avg_growth_rate;
+    }
+
+    pub fn calculate_future_cashflow(cash_flow_list: Vec<i32>, growth_rate: f32) -> Vec<f32> {
+        let mut future_cashflow: Vec<f32> = Vec::new();
+        for cashflow in cash_flow_list {
+
+            future_cashflow.push(cashflow as f32 * growth_rate)
+        }
+    
+        return future_cashflow
+    }
+
+    pub fn intrinsic_value_per_stock(intrinsic_value: f32, outstanding_shares: u32) -> f32 {
+        return intrinsic_value / outstanding_shares as f32
     }
 
 }
