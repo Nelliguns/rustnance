@@ -42,13 +42,17 @@ mod value {
         // Should create a new list based on the growth rate and the last item of cash flow list
         let growth_rate = calculate_growth_rate(cash_flow_list);
         
-        let mut future_cashflow: Vec<f32> = Vec::new();
-        for &cashflow in cash_flow_list {
+        let mut future_cashflow_list: Vec<f32> = Vec::new();
+        let mut cashflow: f32 = cash_flow_list[cash_flow_list.len() - 1] as f32;
+        for i in 0..10 {
+            println!("This is i: {}", i);
             
-            future_cashflow.push(cashflow as f32 * growth_rate)
+            future_cashflow_list.push(cashflow * growth_rate);
+            cashflow *= growth_rate;
         }
-        println!("Future cashflow: {:?}", future_cashflow);
-        return future_cashflow
+        println!("Future cashflow: {:?}", future_cashflow_list);
+        println!("Length of f cashflow list: {}", future_cashflow_list.len());
+        return future_cashflow_list
     }
 
     pub fn calculate_intrinsic_value(cash_flow_list: Vec<i32>, r: f32) -> f32 {
@@ -61,13 +65,14 @@ mod value {
         
         for cashflow in &future_cash_flow_list {
             n += 1;
-            discounted_cashflow += cashflow / (1.0 + &r).powf(n as f32);
+            discounted_cashflow += cashflow / (1.0 + &r).powf(n as f32); // have another look to make sure this is correct
         }
         println!("Discounted cashflow: {}", discounted_cashflow);
         println!("Final year cashflow: {}", (future_cash_flow_list[future_cash_flow_list.len() - 1]));
         println!("Discount rate - growth rate: {}", (&r - growth_rate));
         
         //                                              [Final Year FCF * (1 + Perpetuity Growth Rate)] ÷ (Discount Rate – Perpetuity Growth Rate)
+        // Have another look to make sure these calculations are good.
         let intrisic_value = discounted_cashflow + (future_cash_flow_list[future_cash_flow_list.len() - 1] * (1.0 + growth_rate)) / (&r - growth_rate);
         
         println!("This is added to discounted cashflow: {}", ((future_cash_flow_list[future_cash_flow_list.len() - 1] * (1.0 + growth_rate)) / (&r - growth_rate)));
