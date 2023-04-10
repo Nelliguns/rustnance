@@ -6,7 +6,7 @@ mod tests {
     #[test]
     fn growth_rate_test() {
         let input = vec![1, 2, 3, 4, 5];
-        let result = calculate_growth_rate(input);
+        let result = calculate_growth_rate(&input);
         assert_eq!(result, 1.25);
     }
 }
@@ -14,7 +14,10 @@ mod tests {
 
 mod value {
 
-    pub fn calculate_intrinsic_value(future_cash_flow_list: Vec<f32>, r: f32, growth_rate: f32) -> f32 {
+    pub fn calculate_intrinsic_value(cash_flow_list: Vec<i32>, r: f32) -> f32 {
+
+        let growth_rate = calculate_growth_rate(&cash_flow_list);
+        let future_cash_flow_list = calculate_future_cashflow(&cash_flow_list);
 
         let mut discounted_cashflow = 0.0;
         let mut n = 0;
@@ -23,21 +26,21 @@ mod value {
             n += 1;
             discounted_cashflow += cashflow / (1.0 + &r).powf(n as f32);
         }
-        // [Final Year FCF * (1 + Perpetuity Growth Rate)] ÷ (Discount Rate – Perpetuity Growth Rate)
+        //                      [Final Year FCF * (1 + Perpetuity Growth Rate)] ÷ (Discount Rate – Perpetuity Growth Rate)
         discounted_cashflow += (future_cash_flow_list[future_cash_flow_list.len() - 1] * (1.0 + growth_rate)) / (&r - growth_rate);
     
         return discounted_cashflow
     }
 
 
-    pub fn calculate_growth_rate(cash_flow_list: Vec<i32>) -> f32 {
+    pub fn calculate_growth_rate(cash_flow_list: &Vec<i32>) -> f32 {
 
         let mut all_growth_rates: Vec<i32> = Vec::new();
 
         // let next_years_cashflow = 0;
         let mut index = 1;
 
-        for cashflow in &cash_flow_list {
+        for cashflow in cash_flow_list {
             let current_cashflow = cashflow;
             println!("{}", &index);
             
@@ -54,9 +57,12 @@ mod value {
         return avg_growth_rate;
     }
 
-    pub fn calculate_future_cashflow(cash_flow_list: Vec<i32>, growth_rate: f32) -> Vec<f32> {
+    pub fn calculate_future_cashflow(cash_flow_list: &Vec<i32>) -> Vec<f32> {
+        
+        let growth_rate = calculate_growth_rate(cash_flow_list);
+
         let mut future_cashflow: Vec<f32> = Vec::new();
-        for cashflow in cash_flow_list {
+        for &cashflow in cash_flow_list {
 
             future_cashflow.push(cashflow as f32 * growth_rate)
         }
