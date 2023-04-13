@@ -21,28 +21,36 @@ mod tests {
 
     #[test]
     fn calculate_compounded_interest_test() {
+        let starting_value = 10000.0;
+        let monthly_payment = 2000.0;
+        let yearly_interest = 0.07;
+        let amount_of_years = 15;
+        let result = calculate_compounded_interest(starting_value, monthly_payment, yearly_interest, amount_of_years);
 
+        assert_eq!(result, (660248.8360031071, 292248.83600310725));
     }
 }
 
 mod utilities {
 
 
-    pub fn calculate_compounded_interest(starting_value: f64, monthly_payment: f64, yearly_interest: f64, amount_of_years: i32) -> f64 {
+    pub fn calculate_compounded_interest(starting_value: f64, monthly_payment: f64, yearly_interest: f64, amount_of_years: i32) -> (f64, f64) {
 
 
         let monthly_interest = (yearly_interest / 12.0) + 1.0;
         let amount_of_months = amount_of_years * 12;
         let mut total_amount: f64 = 0.0;
+        let mut total_accumalated_interest: f64 = 0.0;
 
         total_amount += starting_value;
 
         for _ in 1..amount_of_months {
             // need to be the interest and monthly payments are added to the total amount
+            total_accumalated_interest = total_accumalated_interest + ((total_amount + monthly_payment) * monthly_interest) - (total_amount + monthly_payment);
             total_amount = (total_amount + monthly_payment) * monthly_interest;
         };
 
-        return total_amount;
+        return (total_amount, total_accumalated_interest);
 
     }
 
