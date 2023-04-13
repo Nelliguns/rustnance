@@ -21,11 +21,11 @@ mod tests {
 
     #[test]
     fn calculate_compounded_interest_test() {
-        let starting_value = 10000.0;
+        let starting_amount = 10000.0;
         let monthly_payment = 2000.0;
         let yearly_interest = 0.07;
         let amount_of_years = 15;
-        let result = calculate_compounded_interest(starting_value, monthly_payment, yearly_interest, amount_of_years);
+        let result = calculate_compounded_interest(starting_amount, monthly_payment, yearly_interest, amount_of_years);
 
         assert_eq!(result, (660248.8360031071, 292248.83600310725));
     }
@@ -33,8 +33,16 @@ mod tests {
 
 mod utilities {
 
-
-    pub fn calculate_compounded_interest(starting_value: f64, monthly_payment: f64, yearly_interest: f64, amount_of_years: i32) -> (f64, f64) {
+    /// Returned a tuple of the total accumalated amount and how much of that which is interest: (total_amount, total_accumalated_interest)
+    /// 
+    /// # Arguments
+    /// 
+    /// * 'starting_value' - A flat amount from where the calculation starts
+    /// * 'monthly_payment' - A monthly amount that will be added to the amount that accrues interest
+    /// * 'yearly_interest' - The rate at which the investment will increase 8% -> 0.08
+    /// * 'amount_of_years' - The amount of years in which the amount will grow
+    /// 
+    pub fn calculate_compounded_interest(starting_amount: f64, monthly_payment: f64, yearly_interest: f64, amount_of_years: i32) -> (f64, f64) {
 
 
         let monthly_interest = (yearly_interest / 12.0) + 1.0;
@@ -42,7 +50,7 @@ mod utilities {
         let mut total_amount: f64 = 0.0;
         let mut total_accumalated_interest: f64 = 0.0;
 
-        total_amount += starting_value;
+        total_amount += starting_amount;
 
         for _ in 1..amount_of_months {
             // need to be the interest and monthly payments are added to the total amount
@@ -51,7 +59,6 @@ mod utilities {
         };
 
         return (total_amount, total_accumalated_interest);
-
     }
 
 }
@@ -63,8 +70,8 @@ mod value {
     /// # Arguments
     /// 
     /// * 'cash_flow_list' - A Vector(collection of values) that contains the free cash flow of a company
-    /// 
     /// * 'r' - The expected percentual return, eg 15% -> 0.15
+    /// 
     pub fn calculate_intrinsic_value(cash_flow_list: Vec<f32>, r: f32) -> f32 {
     
         let future_cash_flow_list = calculate_future_cashflow(&cash_flow_list);
