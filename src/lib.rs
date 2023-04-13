@@ -16,8 +16,37 @@ mod tests {
         let result = margin_of_safety(value, safety_margin);
         assert_eq!(result, 7000.0);
     }
+
+    use crate::utilities::{calculate_compounded_interest};
+
+    #[test]
+    fn calculate_compounded_interest_test() {
+
+    }
 }
 
+mod utilities {
+
+
+    pub fn calculate_compounded_interest(starting_value: f64, monthly_payment: f64, yearly_interest: f64, amount_of_years: i32) -> f64 {
+
+
+        let monthly_interest = (yearly_interest / 12.0) + 1.0;
+        let amount_of_months = amount_of_years * 12;
+        let mut total_amount: f64 = 0.0;
+
+        total_amount += starting_value;
+
+        for _ in 1..amount_of_months {
+            // need to be the interest and monthly payments are added to the total amount
+            total_amount = (total_amount + monthly_payment) * monthly_interest;
+        };
+
+        return total_amount;
+
+    }
+
+}
 
 mod value {
     
