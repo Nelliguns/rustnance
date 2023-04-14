@@ -10,14 +10,13 @@ pub fn calculate_intrinsic_value(cash_flow_list: &Vec<f32>, r: &f32) -> f32 {
     
     let future_cash_flow_list = calculate_future_cashflow(cash_flow_list);
     
-    let mut discounted_cashflow = 0.0;
     let mut discounted_cashflow_list: Vec<f32> = Vec::new();
     let mut total_free_cashflow = 0.0;
     
     let mut n = 0;
     for cashflow in &future_cash_flow_list {
         n += 1;
-        discounted_cashflow = cashflow / (1.0 + r).powf(n as f32); // have another look to make sure this is correct
+        let discounted_cashflow = cashflow / (1.0 + r).powf(n as f32); // have another look to make sure this is correct
         discounted_cashflow_list.push(discounted_cashflow);
     }
     for cashflow in &discounted_cashflow_list {

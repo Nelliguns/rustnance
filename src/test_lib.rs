@@ -17,7 +17,7 @@ fn margin_of_safety_test() {
     assert_eq!(result, 7000.0);
 }
 
-use crate::utilities::{calculate_compounded_interest};
+use crate::utilities::calculate_compounded_interest;
 
 #[test]
 fn calculate_compounded_interest_test() {
