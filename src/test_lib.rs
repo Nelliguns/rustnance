@@ -1,6 +1,4 @@
 
-// test
-#[cfg(test)]
 use crate::value::{calculate_intrinsic_value, margin_of_safety};
 
 #[test]
