@@ -1,4 +1,8 @@
-# Rustnance 
+# Rustnance
+[![Downloads](https://img.shields.io/crates/d/rustnance.svg?style=flat-square)](https://crates.io/crates/rustnance/)
+[![Version](https://img.shields.io/crates/v/rustnance.svg?style=flat-square)](https://crates.io/crates/rustnance/)
+[![License](https://img.shields.io/crates/l/rustnance.svg?style=flat-square)](https://crates.io/crates/rustnance/)
+
 
 ## Synopsis
 A crate that provides functionality within the space of financial analysis
@@ -12,6 +16,7 @@ This crate is meant to provide calculations, metrics and so on and should not be
 ## Usage
 
 ## Module structure
+![Output of `cargo modules generate tree`](docs/module_structure.png)
 
 ## Find a bug?
 If you found a bug, an issue, an improvement or a potential addition to this project, please submit an issue(if it hasn't already been raised) using the issue tab towards the top. I intend to fix issues as they arise as well as add requested functionality.

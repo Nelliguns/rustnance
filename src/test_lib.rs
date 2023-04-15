@@ -11,7 +11,7 @@ fn growth_rate_test() {
 fn margin_of_safety_test() {
     let value = 10000.0;
     let safety_margin = 0.3;
-    let result = margin_of_safety(value, safety_margin);
+    let result = margin_of_safety(&value, &safety_margin);
     assert_eq!(result, 7000.0);
 }
 
@@ -23,7 +23,7 @@ fn calculate_compounded_interest_test() {
     let monthly_payment = 2000.0;
     let yearly_interest = 0.07;
     let amount_of_years = 15;
-    let result = calculate_compounded_interest(starting_amount, monthly_payment, yearly_interest, amount_of_years);
+    let result = calculate_compounded_interest(&starting_amount, &monthly_payment, &yearly_interest, &amount_of_years);
     
     assert_eq!(result, (660248.8360031071, 292248.83600310725));
 }
