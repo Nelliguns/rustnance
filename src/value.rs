@@ -35,8 +35,8 @@ pub fn calculate_intrinsic_value(cash_flow_list: &Vec<f32>, r: &f32) -> f32 {
 /// * 'intrinsic_value' - An estimation of the value of a business
 /// 
 /// * 'outstanding_shares' - The number of shares a business has issued
-pub fn intrinsic_value_per_stock(intrinsic_value: f32, outstanding_shares: u32) -> f32 {
-    return intrinsic_value / outstanding_shares as f32
+pub fn intrinsic_value_per_stock(intrinsic_value: &f32, outstanding_shares: &f32) -> f32 {
+    return intrinsic_value / outstanding_shares
 }
 
 /// Applies a margin of safety to the intrinsic value to take account for inaccuracies in estimations
@@ -46,7 +46,7 @@ pub fn intrinsic_value_per_stock(intrinsic_value: f32, outstanding_shares: u32) 
 /// * 'intrinsic_value' - An estimation of the value of a business
 /// 
 /// * 'safety_margin' - The percentual margin, e.g. 30% -> 0.3
-pub fn margin_of_safety(intrinsic_value: f32, safety_margin: f32) -> f32 {
+pub fn margin_of_safety(intrinsic_value: &f32, safety_margin: &f32) -> f32 {
     intrinsic_value * (1.0 - safety_margin)
 }
 
