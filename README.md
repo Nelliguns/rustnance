@@ -1,4 +1,8 @@
-# Rustnance 
+# Rustnance
+[![Downloads](https://img.shields.io/crates/d/rustnance.svg?style=flat-square)](https://crates.io/crates/rustnance/)
+[![Version](https://img.shields.io/crates/v/rustnance.svg?style=flat-square)](https://crates.io/crates/rustnance/)
+[![License](https://img.shields.io/crates/l/rustnance.svg?style=flat-square)](https://crates.io/crates/rustnance/)
+
 
 ## Synopsis
 A crate that provides functionality within the space of financial analysis
