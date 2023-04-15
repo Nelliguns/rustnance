@@ -16,6 +16,7 @@ This crate is meant to provide calculations, metrics and so on and should not be
 ## Usage
 
 ## Module structure
+![Output of `cargo modules generate tree`](docs/module_structure.png)
 
 ## Find a bug?
 If you found a bug, an issue, an improvement or a potential addition to this project, please submit an issue(if it hasn't already been raised) using the issue tab towards the top. I intend to fix issues as they arise as well as add requested functionality.
