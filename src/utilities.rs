@@ -39,18 +39,24 @@ pub fn calculate_compounded_interest(
 /// * 'interest_rate' - The percentual interest rate
 /// * 'amortization' - The percentual rate that the loan will be paid off at, example 2.0 
 ///
-pub fn cost_from_payment_plan(loaned_amount: &f64, interest_rate: &f64, amortization: f64) -> f64 {
+pub fn cost_from_payment_plan(loaned_amount: &f64, interest_rate: &f64, amortization_rate: f64) -> f64 {
     
     let mut amount_paid: f64 = 0.0;
-    let mut current_load = loaned_amount;
+    let mut current_loan = loaned_amount.copy();
     let interest_rate = interest_rate;
-    let amortization = amortization;
+    let amortization = (amortization_rate * loaned_amount) - loaned_amount;
+    let monthly_amortization = amortization / 12.0;
     let years = 100.0 / amortization;
     let months = years * 12.0;
-    let monthly_interest = interest_rate / 12.0;
+    let monthly_interest_rate = interest_rate / 12.0;
 
-    for i in range 0..months {
+    for _i in 0..months as i32 {
         
+        let monthly_payment = ((current_loan * monthly_interest_rate) - current_loan) + monthly_amortization;
+        amount_paid += monthly_payment;
+        current_loan -= monthly_amortization;
     }
+
+    amount_paid
     
 }
