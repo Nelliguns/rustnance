@@ -1,4 +1,4 @@
-/// Returned a tuple of the total accumalated amount and how much of that which is interest: (total_amount, total_accumalated_interest)
+/// Returnes a tuple of the total accumalated amount and how much of that which is interest: (total_amount, total_accumalated_interest)
 ///
 /// # Arguments
 ///
@@ -29,4 +29,16 @@ pub fn calculate_compounded_interest(
     }
 
     return (total_amount, total_accumalated_interest);
+}
+
+/// Returnes the total amount paid for a loan given a payment plan.
+///
+/// # Arguments
+///
+/// * 'loaned_amount' - The amount that has been loaned
+/// * 'interest_rate' - The percentual interest rate
+/// * 'time' - The time in years that the loan will be paid off
+///
+pub fn cost_from_payment_plan() -> f64 {
+
 }
