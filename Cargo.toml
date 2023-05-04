@@ -1,11 +1,15 @@
 [package]
 name = "rustnance"
-version = "0.2.1"
+version = "0.2.2"
 edition = "2021"
 license = "MIT"
 description = "A crate to help with financial analysis"
 repository = "https://github.com/Nelliguns/rustnance/"
 readme = "README.md"
+exclude = [
+    "docs/*",
+    ".github/*",
+]
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
