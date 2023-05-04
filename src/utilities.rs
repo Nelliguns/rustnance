@@ -37,8 +37,20 @@ pub fn calculate_compounded_interest(
 ///
 /// * 'loaned_amount' - The amount that has been loaned
 /// * 'interest_rate' - The percentual interest rate
-/// * 'time' - The time in years that the loan will be paid off
+/// * 'amortization' - The percentual rate that the loan will be paid off at, example 2.0 
 ///
-pub fn cost_from_payment_plan() -> f64 {
+pub fn cost_from_payment_plan(loaned_amount: &f64, interest_rate: &f64, amortization: f64) -> f64 {
+    
+    let mut amount_paid: f64 = 0.0;
+    let mut current_load = loaned_amount;
+    let interest_rate = interest_rate;
+    let amortization = amortization;
+    let years = 100.0 / amortization;
+    let months = years * 12.0;
+    let monthly_interest = interest_rate / 12.0;
 
+    for i in range 0..months {
+        
+    }
+    
 }
