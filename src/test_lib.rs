@@ -1,6 +1,5 @@
 use crate::value::{calculate_intrinsic_value, margin_of_safety};
 
-
 #[test]
 fn growth_rate_test() {
     let cashflow = vec![14641.0, 16105.0, 17716.0, 19487.0, 21436.00];
@@ -41,5 +40,3 @@ fn cost_from_payment_plan_test() {
     let result = cost_from_payment_plan(&loaned_amount, &interest_rate, &amortization_rate);
     assert_eq!(result, 2287141.6666667084)
 }
-
-
